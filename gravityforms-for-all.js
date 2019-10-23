@@ -21,26 +21,23 @@ jQuery(document).on('gform_post_render', function(){
 	});
 
 	/**
-	 * Make checkboxes fields more accessible:
-	 * - Add role="group" and aria-label to checkbox fields.
-	 * - Convert .gfield_label labels to span on checkboxes to avoid
-	 *   double labels on the same field.
+	 * Add role="group" and aria-label to checkbox fields.
 	 */
 	jQuery( '.ginput_container_checkbox' ).each(function(){
-		var $label = jQuery( this ).closest( '.gfield' ).find( '.gfield_label' );
-		var html = $label.html();
-		var label = $label.text();
-		$label.after( '<span class="gfield_label">' + html + '<span>' );
-		$label.remove();
+		var label = jQuery( this ).siblings( '.gfield_label' ).text();
 		jQuery( this ).attr( 'role', 'group' ).attr( 'aria-label', label );
 	});
 
 	/**
-	 * Convert .gfield_label of Name fields to span
-	 * to prevent orphaned labels.
+	 * Convert .gfield_label to span to prevent orphaned 
+	 * labels on Name, Address and Checkboxes fields.
 	 */
-	jQuery( '.ginput_container_name' ).each(function(){
-		var $label = jQuery( this ).siblings( 'label' );
+	jQuery(
+		'.ginput_container_name, '
+		+ '.ginput_container_address, '
+		+ '.ginput_container_checkbox'
+	).each(function(){
+		var $label = jQuery( this ).siblings( '.gfield_label' );
 		var html = $label.html();
 		$label.after( '<span class="gfield_label">' + html + '<span>' );
 		$label.remove();
