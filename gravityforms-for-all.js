@@ -36,6 +36,17 @@ jQuery(document).on('gform_post_render', function(){
 	});
 
 	/**
+	 * Convert .gfield_label of Name fields to span
+	 * to prevent orphaned labels.
+	 */
+	jQuery( '.ginput_container_name' ).each(function(){
+		var $label = jQuery( this ).siblings( 'label' );
+		var html = $label.html();
+		$label.after( '<span class="gfield_label">' + html + '<span>' );
+		$label.remove();
+	});
+
+	/**
 	 * Set focus on the first input with errors.
 	 */
 	jQuery( '.gfield_error input' ).eq(0).focus();
