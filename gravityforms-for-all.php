@@ -3,7 +3,7 @@
  * Plugin Name: Gravity Forms for All
  * Plugin URI: https://github.com/MIGHTYminnow/gravityforms-for-all
  * Description: Makes your Gravity Forms accessible.
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: MIGHTYminnow
  * Author URI: https://mightyminnow.com
  */
