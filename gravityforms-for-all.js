@@ -1,4 +1,11 @@
 jQuery(document).on('gform_post_render', function(){
+	function setAutocomplete( autocomplete, $container, catalog ) {
+		var label_text = $container.closest( '.gfield' ).find( '.gfield_label' ).text().replace( '*', '' );
+		if ( catalog.includes( label_text ) ) {
+			$container.find( 'input' ).attr( 'autocomplete', autocomplete );
+		}	
+	}
+
 	/**
 	 * Implement autocomplete attribute.
 	 */
