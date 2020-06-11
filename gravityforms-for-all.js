@@ -1,4 +1,6 @@
-jQuery(document).on('gform_post_render', function(){
+jQuery(document).on('gform_post_render', function( event, form_id, current_page ){
+	var $form = jQuery( '#gform_' + form_id );
+
 	function setAutocomplete( autocomplete, $container, catalog ) {
 		var label_text = $container.closest( '.gfield' ).find( '.gfield_label' ).text().replace( '*', '' );
 		if ( catalog.includes( label_text ) ) {
@@ -61,6 +63,17 @@ jQuery(document).on('gform_post_render', function(){
 	jQuery( '.gfield_error input, .gfield_error select, .gfield_error textarea' ).each(function(){
 		var id = jQuery(this).closest( '.gfield' ).find( '.validation_message' ).attr( 'id' );
 		jQuery(this).attr( 'aria-describedby', '#' + id );
+	});
+
+	/**
+	 * Fix aria-describedby of file inputs.
+	 */
+	$form.find( '.ginput_container_fileupload input[type="file"]' ).each( function(){
+		if ( jQuery( this ).closest( '.gfield' ).hasClass( 'gfield_error' ) ) {
+			return;
+		}
+		var field_id = jQuery( this ).attr( 'id' ).replace( 'input_', '' );
+		jQuery( this ).attr( 'aria-describedby', 'field_' + field_id + '_fmessage live_validation_message_' + field_id + ' extensions_message_' + field_id );
 	});
 });
 
