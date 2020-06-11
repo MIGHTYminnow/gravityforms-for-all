@@ -63,3 +63,9 @@ jQuery(document).on('gform_post_render', function(){
 		jQuery(this).attr( 'aria-describedby', '#' + id );
 	});
 });
+
+gform.addAction('gform_post_recaptcha_render', function (elem) {
+	$response = jQuery( elem ).find( '.g-recaptcha-response' );
+	$response.attr( 'aria-hidden', 'true' );
+	$response.attr( 'aria-label', 'Ignore this field.' );
+});
