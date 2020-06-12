@@ -42,13 +42,23 @@ jQuery(document).on('gform_post_render', function( event, form_id, current_page 
 	 * labels on Name, Address and Checkboxes fields.
 	 */
 	jQuery(
-		'.ginput_container_name, '
-		+ '.ginput_container_address, '
+		'.ginput_container_address, '
 		+ '.ginput_container_checkbox'
 	).each(function(){
 		var $label = jQuery( this ).siblings( '.gfield_label' );
 		var html = $label.html();
 		$label.after( '<span class="gfield_label">' + html + '<span>' );
+		$label.remove();
+	});
+
+	/**
+	 * Convert .gfield_label to span to prevent orphaned 
+	 * labels on Name, Address and Checkboxes fields.
+	 */
+	jQuery( '.ginput_container_name' ).each(function(){
+		var $label = jQuery( this ).siblings( '.gfield_label' );
+		var html = $label.html();
+		$label.after( '<legend class="gfield_label">' + html + '</legend>' );
 		$label.remove();
 	});
 
