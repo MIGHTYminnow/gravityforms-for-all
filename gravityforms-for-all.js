@@ -75,6 +75,12 @@ jQuery(document).on('gform_post_render', function( event, form_id, current_page 
 		var field_id = jQuery( this ).attr( 'id' ).replace( 'input_', '' );
 		jQuery( this ).attr( 'aria-describedby', 'field_' + field_id + '_fmessage live_validation_message_' + field_id + ' extensions_message_' + field_id );
 	});
+
+	$form.find( '.ginput_recaptcha' ).each( function(){
+		var $label = jQuery( this ).prev( '.gfield_label' );
+		$label.after( '<span class="gfield_label">' + $label.html() + '</span>' );
+		$label.remove();
+	});
 });
 
 gform.addAction('gform_post_recaptcha_render', function (elem) {
