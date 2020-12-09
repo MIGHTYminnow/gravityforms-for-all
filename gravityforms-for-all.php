@@ -18,3 +18,18 @@ if ( ! function_exists( 'gfa_enqueue_assets' ) ) {
 		wp_enqueue_script( 'gravityforms-for-all', plugin_dir_url( __FILE__ ) . 'gravityforms-for-all.js', array( 'jquery' ), '1.0.3', true );
 	}
 }
+
+/**
+ * WAVE Accessibility Fix: "Missing form label" on "Other" radio field.
+ */
+add_filter( 'gform_field_content', 'gf_other_choice_aria_label', 10, 5 );
+
+if ( ! function_exists( 'gf_other_choice_aria_label' ) ) {
+	function gf_other_choice_aria_label( $field_content, $field, $value, $entry_id, $form_id ) {
+		if ( 'radio' == $field->type ) {
+			$field_content = str_replace( "value='gf_other_choice'", "value='gf_other_choice' aria-label='Other'", $field_content );
+		}
+
+		return $field_content;
+	}
+}
