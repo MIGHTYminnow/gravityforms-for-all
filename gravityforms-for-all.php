@@ -33,3 +33,18 @@ if ( ! function_exists( 'gf_other_choice_aria_label' ) ) {
 		return $field_content;
 	}
 }
+
+/**
+ * WAVE Accessibiity Fix: "Broken ARIA reference" on File Upload fields.
+ */
+add_filter( 'gform_field_content', 'gf_fileupload_broken_aria_reference_fix', 10, 5 );
+
+if ( ! function_exists( 'gf_fileupload_broken_aria_reference_fix' ) ) {
+	function gf_fileupload_broken_aria_reference_fix( $field_content, $field, $value, $entry_id, $form_id ) {
+		if ( 'fileupload' == $field->type && ! isset( $field->validation_message ) ) {
+			$field_content = str_replace( "aria-describedby='validation_message_{$form_id}_{$field->id} ", "aria-describedby='", $field_content );
+		}
+
+		return $field_content;
+	}
+}
