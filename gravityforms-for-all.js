@@ -52,17 +52,6 @@ jQuery(document).on('gform_post_render', function( event, form_id, current_page 
 	});
 
 	/**
-	 * Convert .gfield_label to span to prevent orphaned 
-	 * labels on Name, Address and Checkboxes fields.
-	 */
-	jQuery( '.ginput_container_name' ).each(function(){
-		var $label = jQuery( this ).siblings( '.gfield_label' );
-		var html = $label.html();
-		$label.after( '<legend class="gfield_label">' + html + '</legend>' );
-		$label.remove();
-	});
-
-	/**
 	 * Set focus on the first input with errors.
 	 */
 	jQuery( '.gfield_error input' ).eq(0).focus();
