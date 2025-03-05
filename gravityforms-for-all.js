@@ -50,17 +50,6 @@ jQuery(document).on('gform_post_render', function( event, form_id, current_page 
 		jQuery(this).attr( 'aria-describedby', '#' + id );
 	});
 
-	/**
-	 * Fix aria-describedby of file inputs.
-	 */
-	$form.find( '.ginput_container_fileupload input[type="file"]' ).each( function(){
-		if ( jQuery( this ).closest( '.gfield' ).hasClass( 'gfield_error' ) ) {
-			return;
-		}
-		var field_id = jQuery( this ).attr( 'id' ).replace( 'input_', '' );
-		jQuery( this ).attr( 'aria-describedby', 'field_' + field_id + '_fmessage live_validation_message_' + field_id + ' extensions_message_' + field_id );
-	});
-
 	$form.find( '.ginput_recaptcha' ).each( function(){
 		var $label = jQuery( this ).prev( '.gfield_label' );
 		$label.after( '<span class="gfield_label">' + $label.html() + '</span>' );
